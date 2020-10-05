@@ -23,5 +23,12 @@ li{
     display:none;
 }
 .checked {
-    background-color: grey;
+    /* background-color: grey; */
+}
+
+/*Le vrai style commence */
+
+body{
+    margin:0;
+    padding:0;
 }

@@ -1,148 +1,116 @@
 let ajout = document.getElementById("Ajout");
-let list = document.querySelectorAll("div")[1];
+let list = document.querySelectorAll("div")[3];
 let input = document.querySelector("input");
-let myUl = document.querySelector("ul");
+let The3Buttons = document.querySelectorAll("div")[1];
+
 // let BtnSuppresion = document.createElement("button");
 // let BtnModification = document.createElement("button");
 
 console.log(ajout);
 console.log(list);
-// console.log(arr);
-let li;
-let btnV;
-let btnS;
-let btnM;
-
-
-var listLi = document.getElementsByTagName("li");
-var i;
-// Permet de mettre la classe close à tout ces fucking span.
-for (i = 0; i < listLi.length; i++) {
-  var span = document.createElement("SPAN");
-  span.className = "close";
-  listLi[i].appendChild(span);
-}
-// Permet la suppression de l'element Close plutôt de le display none.
-var close = document.getElementsByClassName("close");
-var i;
-// for (i = 0; i < close.length; i++) {
-//   close[i].onclick = function() {
-//       if (condition) {
-//         div.style.display = "none";
-//       }
-//     let btnYes = document.createElement("button");
-//     btnYes.textContent="yes";
-//     this.appendChild(btnYes)
-//     let btnNo = document.createElement("button");
-//     var div = this.parentElement;
-    
-//   }
-// }
-
-// 
-
-myUl.addEventListener("click",(e)=>{
-    console.log("ok");
-    if (e.target.className==="BtnValidation") {
-        console.log("yes");
-        // e.target.parentElement.toggle("done");
-    }
-})
-
 
 ajout.addEventListener("click",()=>{
-    if (input.value === '') {
-        alert("You must write something!");
-    } else if (input.value.length>0) {
-    li = document.createElement("li");
-    // let BtnValidation = document.createElement("button");
+    let tache = document.createElement("div");
+    tache.classList.add("Tous");
     let spant = document.createElement("span");
     let t =document.createTextNode(input.value);
-    li.setAttribute("class","tache");
     spant.appendChild(t);
-    li.appendChild(spant)
-    myUl.appendChild(li);   
-    input.value=""
-    // Creation du bouton Valider
-    btnV = document.createElement("button");
-    console.log(btnV);
-    btnV.textContent="Valider";
-    btnV.setAttribute("class","BtnValidation")
-    li.appendChild(btnV);
-    btnV.onclick= function(){
-        this.parentElement.classList.toggle("checked")
-    }
-    // Creation du bouton Suppresion
-    
-    btnS = document.createElement("button");
-    btnS.className="close";
-    btnS.textContent="Supprimer";
-    li.appendChild(btnS);
-    // la suppresion de l'element
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            btnM.classList.add("notDisplayed")
-            btnV.classList.add("notDisplayed")
-            var div = this.parentElement;
-            let bitch = this;
-            console.log(div);
-            let btnYes = document.createElement("button");
-            btnYes.textContent="yes";
-            let yes = btnYes;
-            this.parentElement.appendChild(btnYes);
-            let btnNo = document.createElement("button");
-            btnNo.textContent="no";
-            let no = btnNo;
-            this.parentElement.appendChild(btnNo);
-            // this.style.display="hidden"
-            this.classList.add("notDisplayed");
-            btnYes.onclick = function(){
-                div.classList.add("notDisplayed");
-                console.log("yes");
-                }
-            btnNo.onclick = function(){
-                bitch.classList.remove("notDisplayed")
-                btnM.classList.remove("notDisplayed")
-                btnV.classList.remove("notDisplayed")
-                // div.style.display = "block";
-                console.log("no");
-                btnNo.classList.add("notDisplayed");
-                btnYes.classList.add("notDisplayed");
-                
-                
-                // let btn = document.createElement("button")
-                // btn.textContent="supprimer";
-                // btn.className="close"
-                // div.appendChild(btn);
-                }   
-            }
-            
-        }
-    }
+    tache.appendChild(spant);
+    // creation du bouton validé.
+    let btnV = document.createElement("button");
+    btnV.textContent="validé";
+    tache.appendChild(btnV);
+    // création du bouton modifier
+    let btnM = document.createElement("button");
+    btnM.textContent="modifier"
+    tache.appendChild(btnM);
+    // creation du bouton supprimer
+    let btnS = document.createElement("button");
+    btnS.textContent="supprimer";
+    tache.appendChild(btnS);
 
-    // Creation du bouton Modification
-    btnM = document.createElement("button");
-    btnM.textContent="Modification";
-    btnM.setAttribute("class","BtnModification");
-    li.appendChild(btnM);
-    // A FAIRE
-    btnM.onclick = function (){
-        console.log("Modif");
-        let inputM = document.createElement('input');
-        console.log(
-            this.parentElement.children[0]
-        );
-        this.parentElement.children[0] = inputM;
-        
+    list.appendChild(tache)
+
+})
+
+
+list.addEventListener('click', (e)=>{
+    //btn validé
+    if(e.target.innerText == "validé"){
+        e.target.parentNode.setAttribute('style', 'background-color: grey');
+        e.target.innerText = "retour";
+        e.target.parentNode.classList.add("checked")
+    //btn décoché
+    } else if (e.target.innerText == "retour") {
+        e.target.parentNode.setAttribute('style', 'background-color: white')
+        e.target.innerText = "validé";
+        e.target.parentNode.classList.remove("checked")
+
+    //btn supprimer
+    } else if (e.target.innerText == 'supprimer'){
+        btnSupAnu = document.createElement('button')
+        e.target.parentNode.appendChild(btnSupAnu);
+        btnSupAnu.classList.add('btnWithTask');
+        btnSupAnu.innerText = 'oui';
+        e.target.innerText = 'non';
+        btnSupAnu.addEventListener('focus', ()=>{
+            btnSupAnu.parentNode.remove();
+        });
+    //btn annulation suppression
+    } else if (e.target.innerText == 'non'){
+        btnSupAnu.remove();
+        e.target.innerText = 'supprimer'
+    } else if (e.target.innerText == "modifier") {
+        inputModif = document.createElement('input');
+        e.target.parentNode.insertBefore(inputModif, e.target.nextSibling);
+        inputModif.setAttribute('id', 'spanModifInput');
+        e.target.innerText = "confirmer"
+
+    } else if (e.target.innerText == "confirmer"){
+        console.log("oui");
+        e.target.parentNode.children[0].innerText = e.target.nextElementSibling.value;
+        e.target.nextElementSibling.remove();
+        e.target.innerText = "modifier";
     }
 })
 
-// WORK IN PROGRESS
-btn.addEventListener("click",()=>{
-    li.style = "display:none";
-});
+//Creation des filtres.
 
-// Btn Modification
-BtnModification.addEventListener("click",()=>{
 
+The3Buttons.addEventListener("click",(e)=>{
+    // Btn a faire
+    let listFait = document.getElementsByClassName("checked");
+    let tabFait = Array.from(listFait);
+    let listTous = document.getElementsByClassName("Tous")
+    let tabTous = Array.from(listTous);
+    console.log(tabTous);
+    if (e.target.innerText=="A faire") {    
+        tabFait.forEach(element => {
+            element.classList.add("notDisplayed")
+        });
+    // Btn TOUS
+    }else if(e.target.innerText=="Tous"){
+        tabFait.forEach(element => {
+            element.classList.remove("notDisplayed");
+        });
+        tabTous.forEach(element => {
+
+             element.classList.remove("notDisplayed")
+         });
+    
+    }else if (e.target.innerText=="Terminer") {
+        console.log("yes");
+
+        tabTous.forEach(element => {
+            element.classList.add("notDisplayed");
+            console.log("no");
+
+        })
+             tabFait.forEach(element2 => {
+                 element2.classList.remove("notDisplayed");
+             console.log("no2");
+
+             });
+        }
+    
 })
