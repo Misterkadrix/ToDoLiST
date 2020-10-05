@@ -31,4 +31,47 @@ li{
 body{
     margin:0;
     padding:0;
+    /* background-color: red; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+#Nav{
+    text-align: center;
+    background-color: red;
+    font-size: 35px;
+    border-bottom: black 3px solid;
+}
+#stitre{
+    background-color: red;
+    /* border-bottom: black 3px solid; */
+    /* padding-right: 100%; */
+    margin-top: 0;
+}
+#spantitre{
+    
+    border-bottom: 3px solid black;
+}
+.red{
+    background-color: red;
+}
+.Divcorps{
+    margin: 0 auto;
+    max-width: 48rem;
+    width: 90%;
+    margin-top: 30px;
+    border: 10px solid black;
+    height: 800px;
+    background-color: blanchedalmond;
+}
+.Tous{
+    background-color: #CAC5AE ;
+    column-count: 3;
+    border: 3px solid black;
+    padding: 20px;
+}
+.Tous>span{
+    padding-right:100% ;
+}
+button{
+    background-color: pink;
 }

@@ -10,6 +10,7 @@ console.log(ajout);
 console.log(list);
 
 ajout.addEventListener("click",()=>{
+    if (input.value.length>0) {
     let tache = document.createElement("div");
     tache.classList.add("Tous");
     let spant = document.createElement("span");
@@ -30,7 +31,8 @@ ajout.addEventListener("click",()=>{
     tache.appendChild(btnS);
 
     list.appendChild(tache)
-
+    input.value=""
+    }
 })
 
 
@@ -42,7 +44,7 @@ list.addEventListener('click', (e)=>{
         e.target.parentNode.classList.add("checked")
     //btn décoché
     } else if (e.target.innerText == "retour") {
-        e.target.parentNode.setAttribute('style', 'background-color: white')
+        e.target.parentNode.setAttribute('style', 'background-color: #CAC5AE ')
         e.target.innerText = "validé";
         e.target.parentNode.classList.remove("checked")
 
@@ -109,7 +111,6 @@ The3Buttons.addEventListener("click",(e)=>{
              tabFait.forEach(element2 => {
                  element2.classList.remove("notDisplayed");
              console.log("no2");
-
              });
         }
     
